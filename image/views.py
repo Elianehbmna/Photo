@@ -52,3 +52,10 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'all-image/search.html',{"message":message})
+
+def image(request,image_id):
+    try:
+        images = Image.objects.get(id = image_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"all-image/image.html", {"image":images})
