@@ -40,11 +40,12 @@ class Category(models.Model):
 
 # Create your models here.
 class Image(models.Model):
-    image = models.ImageField(upload_to='images/')
+    # image = models.ImageField(upload_to='images/')
     name = models.CharField(max_length=30)
     description = models.TextField()
     location = models.ForeignKey(Location, blank=True)
     category = models.ForeignKey(Category, blank=True)
+    pub_date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
        return self.name
@@ -52,18 +53,18 @@ class Image(models.Model):
     def save_image(self):
         self.save()
     
-    @classmethod
-    def delete_image(cls,id):
-        images = cls.objects.filter(id=id)
-        images.delete()
+    # @classmethod
+    # def delete_image(cls,id):
+    #     images = cls.objects.filter(id=id)
+    #     images.delete()
     
-    def get_image_by_id(id):
-        images = cls.objects.filter(id=id)
-        return images
+    # def get_image_by_id(id):
+    #     images = cls.objects.filter(id=id)
+    #     return images
 
-    def filter_by_location(location):
-        images = cls.objects.filter(location=location)
-        return images
+    # def filter_by_location(location):
+    #     images = cls.objects.filter(location=location)
+    #     return images
 
 
 
