@@ -40,7 +40,7 @@ class Category(models.Model):
 
 # Create your models here.
 class Image(models.Model):
-    # image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/')
     name = models.CharField(max_length=30)
     description = models.TextField()
     location = models.ForeignKey(Location, blank=True)
