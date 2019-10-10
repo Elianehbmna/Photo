@@ -65,6 +65,15 @@ class Image(models.Model):
     # def filter_by_location(location):
     #     images = cls.objects.filter(location=location)
     #     return images
-
+    @classmethod
+    def todays_image(cls):
+        today = dt.date.today()
+        image = cls.objects.filter(pub_date__date = today)
+        return image
+        
+    @classmethod
+    def days_image(cls,date):
+        image = cls.objects.filter(pub_date__date = date)
+        return image
 
 
