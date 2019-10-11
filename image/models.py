@@ -5,10 +5,10 @@ from django.db import models
 import datetime as dt
 
 class Location(models.Model):
-    name=models.CharField(max_length=30)
+    location_name=models.CharField(max_length=30)
 
     def __str__(self):
-        return self.name
+        return self.location_name
 
     def save_location(self):
         self.save()
@@ -20,10 +20,10 @@ class Location(models.Model):
         self.delete()
 
 class Category(models.Model):
-    name=models.CharField(max_length=30)
+    category_name=models.CharField(max_length=30)
 
     def __str__(self):
-        return self.name
+        return self.category_name
 
     def save_category(self):
         self.save()
@@ -43,8 +43,8 @@ class Image(models.Model):
     image = models.ImageField(upload_to='images/')
     name = models.CharField(max_length=30)
     description = models.TextField()
-    location = models.ForeignKey(Location, blank=True)
-    category = models.ForeignKey(Category, blank=True)
+    location = models.ForeignKey(Location,db_column='location_name', blank=True)
+    category = models.ForeignKey(Category,db_column='category_name', blank=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -77,6 +77,6 @@ class Image(models.Model):
         return image
 
     @classmethod
-    def search_by_name(cls,search_term):
-        image = cls.objects.filter(name__icontains=search_term)
+    def search_by_image(cls,search_term):
+        image = cls.objects.filter(category__category_name__contains=search_term)
         return image
