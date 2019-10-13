@@ -8,7 +8,7 @@ class LocationTestClass(TestCase):
 
     # Set up method
     def setUp(self):
-        self.remera= Location(name="Remera")
+        self.remera= Location(location_name="Remera")
 
     # Testing  instance
     def test_instance(self):
@@ -19,9 +19,11 @@ class LocationTestClass(TestCase):
         self.remera.save_location()
         locations = Location.objects.all()
         self.assertTrue(len(locations) > 0)
+
+    def tearDown(self):
+        Location.objects.all().delete()
     
     def test_delete_location(self):
         self.remera.delete_location()
-        locations = Location.objects.all()
-        self.assertTrue(len(locations) > 0)
-
+        self.assertEqual(len(Location.objects.all()),0)
+        

@@ -1,30 +1,48 @@
 {%extends 'all-image/base.html'%}
+
 {% block content %} 
 {{ block.super}}
-
+<body>
 <div class="container">
 
+<div class="jumbotron">
+  <h1 style="text-align: center">Welcome to the Gallery</h1>
+  <br><p  style="text-align: center ; font-size: 16px",>its a gallery which shows beautiful places all over the world</p>
+   <br><br> 
+  </div>
   <!-- Looping through image   -->
+
+  <div style="display:flex;flex-wrap: wrap;">
+  
   {% for image_item in image %}
 
-  <div class="row">
     <!--Display news Article images  -->
-    <div class="col-md-4" data-toggle="modal" data-target="#{{image_item.id}}">
+    <div class="col-md-4">
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="card border-secondary" data-toggle="modal" data-target="#{{image_item.id}}">
+        <div class="d-flex w-100 justify-content-between">
         <img src="{{image_item.image.url}}" class="img-responsive" alt="Image">
       </div>
+    </div>
+  </div>
 </div>
+      {% endfor %} 
+    </div>
+  
+    
+    
+    {% for image_item in image %}
 <div class="modal fade modal-profile" tabindex="-1" role="dialog" aria-labelledby="modalProfile" id="{{image_item.id}}" aria-hidden="true" data-dismiss="modal">
     <div class="modal-dialog modal-lg">
           <div class="modal-content">
-                <div class="modal-header">
-                    <img src="{{image_item.image.url}}" alt="" width="300" height='250'>
+                <div class="modal-header" id="image">
+                    <img src="{{image_item.image.url}}" alt=""style ="width:100%;height:100%">
                       <h3 class="modal-title">{{image_item.name}}</h3>
                 </div>
                 <div class="modal-body" >
-<p>Name: {{image_item.image_name}}</p>
-<p>Description: {{image_item.description}}</p>
-<p>category: {{image_item.category}}</p>
-<p>location: {{image_item.location}}</p>
+<p><strong>Description:</strong>  {{image_item.description}}</p>
+<p><strong>Category:</strong> {{image_item.category}}</p>
+<p><strong>Location:</strong> {{image_item.location}}</p>
 </div>
 <div class="modal-footer">
   <input class="form-control" type="text" value="http://127.0.0.1:8000{{image_item.image.url}}" id="thislinkhere-{{image_item.id}}">
@@ -32,6 +50,8 @@
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
 </div>
 </div>
 
@@ -42,5 +62,4 @@
   {% endfor %}
 
 </div>
-
 {% endblock %}

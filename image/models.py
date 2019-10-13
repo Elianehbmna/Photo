@@ -53,30 +53,24 @@ class Image(models.Model):
     def save_image(self):
         self.save()
     
-    # @classmethod
-    # def delete_image(cls,id):
-    #     images = cls.objects.filter(id=id)
-    #     images.delete()
-    
-    # def get_image_by_id(id):
-    #     images = cls.objects.filter(id=id)
-    #     return images
-
-    # def filter_by_location(location):
-    #     images = cls.objects.filter(location=location)
-    #     return images
     @classmethod
-    def todays_image(cls):
-        today = dt.date.today()
-        image = cls.objects.filter(pub_date__date = today)
-        return image
+    def delete_image(cls,id):
+        images = cls.objects.filter(id = image_id)
+        images.delete()
         
     @classmethod
-    def days_image(cls,date):
-        image = cls.objects.filter(pub_date__date = date)
-        return image
+    def get_image_by_id(id):
+        images = cls.objects.filter(id = image_id)
+        return images
+
 
     @classmethod
     def search_by_image(cls,search_term):
         image = cls.objects.filter(category__category_name__contains=search_term)
         return image
+
+    @classmethod
+    def filter_by_location(cls, location):
+        images = cls.objects.filter(location=location)
+        return images
+    
